@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="js/touch.min.js"></script>
+    <script src="js/jquery.js"></script>
+    <style>
+        .banner{
+            margin: 0 auto;
+            width:600px;
+            height:400px;
+            border:1px solid black;
+            overflow: hidden;
+        }
+        .box{
+            width:300%;
+            height:100%;
+        }
+        .box div{
+            float: left;
+            width:33.3333%;
+            height:100%;
+            background-repeat: no-repeat;
+            background-size:cover;
+        }
+        .box div:nth-child(1){
+            background-image: url("img/tm-sigma-01.jpg");
+        }
+        .box div:nth-child(2){
+            background-image: url("img/tm-sigma-02.jpg");
+        }
+        .box div:nth-child(3){
+            background-image: url("img/tm-sigma-03.jpg");
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <div class="box">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</body>
+<script>
+    $(".banner").mousedown(function(e){
+        e.preventDefault();
+    })
+    $(".banner").mousemove(function(e){
+        e.preventDefault();
+    })
+    var marginL;
+    var num=0;
+    var width=$(".banner").width();
+    touch.on("body","dragstart",$(".box"),function(){
+        $(".box").css({
+            transition:"none"
+        });
+        marginL= parseInt($(".box").css("marginLeft"))?parseInt($(".box").css("marginLeft")):0;
+    });
+    touch.on("body","drag",$(".box"),function(e){
+       $(".box").css({
+           marginLeft:marginL+ e.x
+       })
+    })
+    touch.on("body","dragend",$(".box"),function(e){
+        if(Math.abs(e.x)>100){
+           if(e.direction=="left"){
+               num++;
+               if(num>=$(".box>div").length){
+                   num=$(".box>div").length-1;
+               }
+           }else if(e.direction=="right"){
+               num--;
+               if(num<=-1){
+                   num=0;
+               }
+           }
+            $(".box").css({
+                marginLeft:-num*width,
+                transition:"margin 1s ease"
+            })
+        }else{
+            $(".box").css({
+                marginLeft:-num*width,
+                transition:"margin 1s ease"
+            })
+        }
+    })
+
+</script>
+</html>
