@@ -6,10 +6,25 @@
     <script src="js/touch.min.js"></script>
     <script src="js/jquery.js"></script>
     <style>
+        .bg{
+            position:absolute;
+            left:0;
+            top:0;
+            bottom:0;
+            right: 0;
+            margin: auto;
+            width:800px;
+            height:600px;
+            background-image: url(img/bg.jpg);
+            background-size: cover;
+        }
         .banner{
+            position: absolute;
+            top:154px;
+            left:157px;
             margin: 0 auto;
-            width:600px;
-            height:400px;
+            width:490px;
+            height:280px;
             border:1px solid black;
             overflow: hidden;
         }
@@ -36,6 +51,7 @@
     </style>
 </head>
 <body>
+<div class="bg">
     <div class="banner">
         <div class="box">
             <div></div>
@@ -43,6 +59,7 @@
             <div></div>
         </div>
     </div>
+</div>
 </body>
 <script>
     $(".banner").mousedown(function(e){
